@@ -1,18 +1,12 @@
-import { useState } from "react";
 import Todos from "./components/todos";
-import TodoModel from "./models/todoModel";
 import TodoForm from "./components/todoForm";
+import TodosContextProvider from "./store/todo-context";
 function App() {
-  const [todos, setTodos] = useState<TodoModel[]>([]);
-  function addTodos(text: string) {
-    const id = new Date().getMilliseconds();
-    setTodos((previousTodos) => previousTodos.concat(new TodoModel(id, text)));
-  }
   return (
-    <>
-    <TodoForm addTodos={addTodos} />
-    <Todos todos={todos} />
-    </>
+    <TodosContextProvider>
+      <TodoForm />
+      <Todos />
+    </TodosContextProvider>
   );
 }
 export default App;
